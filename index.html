@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regex operations</title>  
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f1f1f1;
+            margin: 0;
+        }
+
+        /* Main container styling */
+        #main {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+
+        /* Input styling */
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        /* Button styling */
+        button {
+            padding: 12px 20px;
+            background-color: #17c2fa;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Styling for success and error messages */
+        #error-message, #success-message {
+            font-size: 14px;
+            margin-top: 10px;
+            color: #d9534f;  /* Red for error */
+        }
+
+        #success-message {
+            color: #5cb85c;  /* Green for success */
+        }
+
+        /* Add space between messages and input */
+        #error-message {
+            color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <input type="email" placeholder="email" id="email" required><br><br>
+        <input type="password" placeholder="password" id="password" required><br><br><br>
+        <button id="btn">submit</button>
+        <div id="error-message" ></div>
+        <div id="success-message"></div>
+    </div>
+    <script>
+         let email=document.getElementById("email");
+         let password=document.getElementById("password");
+         let Submit=document.getElementById("btn");
+         let errormessage=document.getElementById("error-message");
+         let successMessage=document.getElementById("success-message");
+         const emailPattern=/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+         const passwordPattern=/^(?=.*[A-Z])(?=.*\d)(?=.*[a-z]).{8,}$/;
+         Submit.addEventListener("click",function(){
+            errormessage.innerText=''
+            successMessage.innerText=''
+            let emailvaild=emailPattern.test(email.value);
+            let passwordValid=passwordPattern.test(password.value);
+            if(!emailvaild){
+                errormessage.innerText = 'Invalid email format. Please enter a valid email address.';
+            }
+            else if (!passwordValid) {
+                errormessage.innerText = 'Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, and one number.';
+            } else {
+                successMessage.innerText = 'Form submitted successfully!';
+            }
+
+         })
+        
+    </script>
+</body>
+</html>
